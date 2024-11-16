@@ -8,7 +8,6 @@ interface Props {
 }
 
 function Level4(props: Props) {
-    props.setP("");
     props.setL("Slide image onto cutout");
 
     const [position, setPosition] = useState(50);
@@ -21,7 +20,7 @@ function Level4(props: Props) {
         const newLeft = Math.max(0, Math.min(e.clientX - slider.left, slider.width));
         setPosition(newLeft);
 
-        if (newLeft >= 175 && newLeft <= 215) {
+        if (newLeft/slider.width >= 0.5 && newLeft/slider.width <= 0.6) {
             props.setSuccess(true);
         } else {
             props.setSuccess(false);

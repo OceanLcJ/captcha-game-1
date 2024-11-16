@@ -1,5 +1,5 @@
 import './Window.css'
-import Poly from './captcha/poly.tsx'
+import Poly from './captcha/Poly.tsx'
 import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2.tsx'
 import Level3 from './captcha/Level3.tsx'
