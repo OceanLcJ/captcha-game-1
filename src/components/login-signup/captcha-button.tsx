@@ -26,7 +26,7 @@ export function CaptchaButton() {
 
     return (
         <div className="captcha-container">
-            <div className='checkbox-text-container' onClick={HandleCheckmarkClick}>
+            <div className='checkbox-text-container'>
                 {GetCheckmarkDiv(captchaComplete)}
                 <label htmlFor="checkbox">I'm not a robot</label>
             </div>
