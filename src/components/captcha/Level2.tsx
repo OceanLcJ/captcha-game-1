@@ -1,16 +1,21 @@
-import './Level2.css'
+import SelectBoxes from "./SelectBoxes";
 
 interface Props {
     setSuccess: (val: boolean) => void;
+    setP: (paragraph: string) => void;
+    setL: (paragraph: string) => void;
 }
 
-function Level2(props : Props) {
+function Level2(props: Props) {
+    const correct = [1, 2, 5, 6];
+    props.setP("Select all the images with");
+    props.setL("Traffic Lights");
 
     return (
-        <div className="level2" onClick={() => props.setSuccess(true)}>
-            Level2
-        </div>
+        <>
+            <SelectBoxes setSuccess={props.setSuccess} img={"traffic-lights.jpg"} correct={correct}/>
+        </>
     );
 }
 
-export default Level2
+export default Level2;

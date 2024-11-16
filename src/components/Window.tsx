@@ -8,16 +8,18 @@ function Window() {
     const [index, setIndex] = useState(0);
     const [showFailureMessage, setShowFailureMessage] = useState(false);
 
-    const levels = [<Level1 setSuccess={setSuccess}/>, <Level2 setSuccess={setSuccess}/>];
-    const paragraphs = ["Select all the images with"]
-    const larger = ["Crosswalks"]
+    const [p, setP] = useState("");
+    const [l, setL] = useState("");
+
+    const levels = [<Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
+                    <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>];
 
     const handleVerifyClick = () => {
         if (success) {
             if (index < levels.length - 1) {
                 setIndex(index + 1);
             } else {
-                //send to leaderboard
+                alert("End of levels, direct to leaderboard");
             }
         } else {
             setShowFailureMessage(true);
@@ -31,8 +33,8 @@ function Window() {
     return (
         <div className="window">
             <header className="title">
-                <p>{paragraphs[index]}</p>
-                <h2>{larger[index]}</h2>
+                <p>{p}</p>
+                <h2>{l}</h2>
             </header>
 
             <main className="content">
