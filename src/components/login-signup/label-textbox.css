@@ -2,7 +2,8 @@
     width: 100%;
     margin-top: 30px;
 }
-p{
+.name{
+    margin-bottom: 5px;
     align-self: flex-start;
 }
 .text-input{

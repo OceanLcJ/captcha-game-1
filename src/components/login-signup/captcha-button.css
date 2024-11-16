@@ -1,6 +1,6 @@
 .captcha-container {
-    width: min(300px, 100%);
-    height: min(75px, 100%);
+    width: 300px;
+    height: 85px;
     background-color: rgb(249, 249, 249);
     border-style: solid;
     border-width: 1px;
