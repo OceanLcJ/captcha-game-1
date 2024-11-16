@@ -6,9 +6,11 @@ import Level3 from './captcha/Level3.tsx'
 import Level4 from './captcha/Level4.tsx'
 import { useState } from 'react'
 import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
+import { RotatingEmail } from './captcha/RotatingEmail.tsx'
 
 interface Props {
     fade: string;
+    username: string;
 }
 
 function Window(props: Props) {
@@ -20,6 +22,7 @@ function Window(props: Props) {
     const [l, setL] = useState("");
 
     const levels = [
+        <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username} />,
         <Poly setL={setL} setP={setP} setSuccess={setSuccess} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={0} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={1} />,

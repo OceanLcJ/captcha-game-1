@@ -49,6 +49,9 @@ export function SignUpPage(){
     const [window, setWindow] = useState(false);
     const [fadeClass, setFadeClass] = useState("hidden");
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const toggleWindow = () => {
         setWindow(!window);
     };
@@ -70,14 +73,14 @@ export function SignUpPage(){
             <div className="center-container">
                 <h1 className='welcome-header'>Sign up/Login</h1>
                 <h2>Create a new username and password, or enter existing credentials.</h2>
-                <div className='credential-textbox'><LabelTextBox name={"Username"} isPassword={false}></LabelTextBox></div>
-                <div className='credential-textbox'><LabelTextBox name={"Password"} isPassword={true}></LabelTextBox></div>
+                <div className='credential-textbox'><LabelTextBox onChange={setUsername} value={username} name={"Username"} isPassword={false}></LabelTextBox></div>
+                <div className='credential-textbox'><LabelTextBox onChange={setPassword} value={password} name={"Password"} isPassword={true}></LabelTextBox></div>
                 <div className="login-captcha" onClick={toggleWindow}><CaptchaButton /></div>
                 <button className="signup-button">
                     Create account
                 </button>
             </div>
-            {window && <Window fade={fadeClass}/>}
+            {window && <Window fade={fadeClass} username={username} />}
         </div>
     );
 }
