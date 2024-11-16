@@ -50,6 +50,7 @@ export function SignUpPage(){
     const [fadeClass, setFadeClass] = useState("hidden");
 
     const toggleWindow = () => {
+        alert("Toggle window");
         setWindow(!window);
     };
 
@@ -72,7 +73,7 @@ export function SignUpPage(){
                 <h2>Create a new username and password, or enter existing credentials.</h2>
                 <div className='credential-textbox'><LabelTextBox name={"Username"} isPassword={false}></LabelTextBox></div>
                 <div className='credential-textbox'><LabelTextBox name={"Password"} isPassword={true}></LabelTextBox></div>
-                <div className="login-captcha" onClick={toggleWindow}><CaptchaButton /></div>
+                <div className="login-captcha"><CaptchaButton click={toggleWindow}/></div>
                 <button className="signup-button">
                     Create account
                 </button>
