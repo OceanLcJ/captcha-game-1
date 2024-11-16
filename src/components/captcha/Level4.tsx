@@ -60,7 +60,7 @@ function Level4(props: Props) {
                 style={{
                     position: "absolute",
                     left: `${position}px`,
-                    bottom: "60px",
+                    bottom: "50px",
                     transform: "translateX(-50%)",
                 }}
             />
