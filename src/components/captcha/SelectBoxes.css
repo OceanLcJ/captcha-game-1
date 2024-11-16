@@ -2,8 +2,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height: 100%;
+    width: 350px;
+    height: 325px;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 25%;
     display: grid;
