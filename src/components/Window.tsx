@@ -1,4 +1,5 @@
 import './Window.css'
+import Poly from './captcha/poly.tsx'
 import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2.tsx'
 import Level3 from './captcha/Level3.tsx'
@@ -19,6 +20,7 @@ function Window(props: Props) {
     const [l, setL] = useState("");
 
     const levels = [
+        <Poly setL={setL} setP={setP} setSuccess={setSuccess} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={0} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={1} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2} />,
