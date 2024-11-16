@@ -1,5 +1,3 @@
-import * as handPoseDetection from "@tensorflow-models/hand-pose-detection";
-
 import * as fp from "fingerpose";
 import "@tensorflow/tfjs-core";
 import { useEffect, useRef, useState } from "react";
@@ -20,43 +18,79 @@ hands.setOptions({
   minTrackingConfidence: 0.5,
 });
 
+// Make "high five" gesture
+const FiveGesture = new fp.GestureDescription("five");
+
+// All fingers should be extended (not curled)
+for (const finger of [
+  fp.Finger.Thumb,
+  fp.Finger.Index,
+  fp.Finger.Middle,
+  fp.Finger.Ring,
+  fp.Finger.Pinky,
+]) {
+  FiveGesture.addCurl(finger, fp.FingerCurl.NoCurl, 1.0);
+  // Allow for slight curl
+  FiveGesture.addCurl(finger, fp.FingerCurl.HalfCurl, 0.5);
+}
+
+// add fist
+const FistGesture = new fp.GestureDescription("fist");
+
+// All fingers should be fully curled
+for (const finger of [
+  fp.Finger.Thumb,
+  fp.Finger.Index,
+  fp.Finger.Middle,
+  fp.Finger.Ring,
+  fp.Finger.Pinky,
+]) {
+  FistGesture.addCurl(finger, fp.FingerCurl.FullCurl, 1.0);
+  // Allow for slight variation in curl
+  FistGesture.addCurl(finger, fp.FingerCurl.HalfCurl, 0.5);
+}
+
 const knownGestures = [
   fp.Gestures.ThumbsUpGesture,
   fp.Gestures.VictoryGesture,
-  // Add other gestures
+  FiveGesture,
+  FistGesture,
 ];
+
+const gestureNames = ["five", "fist", "thumbs_up", "victory"];
 
 const gestureEstimator = new fp.GestureEstimator(knownGestures);
 
-const landmarkColors = {
-  thumb: "red",
-  index: "blue",
-  middle: "yellow",
-  ring: "green",
-  pinky: "pink",
-  wrist: "white",
-};
-
-function drawPoint(ctx, x, y, r, color) {
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, 2 * Math.PI);
-  ctx.fillStyle = color;
-  ctx.fill();
-}
-
 const gestureStrings = {
   thumbs_up: "👍",
-  victory: "✌🏻",
+  victory: "✌️", // this doesn't render in vscode, but it looks fine in the browser
+  five: "🖐️",
+  fist: "✊",
 };
 
-export const ThumbsUp = () => {
+interface ThumbsUpProps {
+  setL: (paragraph: string) => void;
+  setP: (paragraph: string) => void;
+  setSuccess: (val: boolean) => void;
+}
+
+export const ThumbsUp = ({ setL, setP, setSuccess }: ThumbsUpProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [currentGesture, setCurrentGesture] = useState<string | null>(
-    "thumbs_up"
-  );
+  const [currentGesture, setCurrentGesture] = useState<string>("thumbs_up");
   const [takeOutOfFrame, setTakeOutOfFrame] = useState(false);
+  const [successCount, setSuccessCount] = useState(0);
+
+  useEffect(() => {
+    if (takeOutOfFrame) {
+      setP("Move your hands");
+      setL("Out of the video");
+    } else {
+      setP("Make this gesture");
+      setL(gestureStrings[currentGesture]);
+    }
+  }, [currentGesture, setL, setP, takeOutOfFrame]);
 
   useEffect(() => {
     hands.onResults((results) => {
@@ -66,9 +100,9 @@ export const ThumbsUp = () => {
           results.multiHandLandmarks.length === 0
         ) {
           setTakeOutOfFrame(false);
-          const nextGesture =
-            currentGesture === "thumbs_up" ? "victory" : "thumbs_up";
-          setCurrentGesture(nextGesture);
+          const randomNextGesture =
+            gestureNames[Math.floor(Math.random() * gestureNames.length)];
+          setCurrentGesture(randomNextGesture);
         }
         return;
       }
@@ -76,7 +110,7 @@ export const ThumbsUp = () => {
       if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         const landmarks = results.multiHandLandmarks[0];
         const formattedLandmarks = landmarks.map((l) => [l.x, l.y, l.z]);
-        const predictions2 = gestureEstimator.estimate(formattedLandmarks, 9.5);
+        const predictions2 = gestureEstimator.estimate(formattedLandmarks, 9);
 
         if (!predictions2.gestures.length) {
           return;
@@ -92,14 +126,20 @@ export const ThumbsUp = () => {
         );
 
         if (bestGesture.name === currentGesture) {
-          console.log("Win!");
+          setSuccessCount(successCount + 1);
           setTakeOutOfFrame(true);
         } else {
           // console.log("Lose!");
         }
       }
     });
-  }, [currentGesture, takeOutOfFrame]);
+  }, [currentGesture, takeOutOfFrame, successCount]);
+
+  useEffect(() => {
+    if (successCount >= 5) {
+      setSuccess(true);
+    }
+  }, [successCount, setSuccess]);
 
   useEffect(() => {
     // Set up webcam
@@ -113,23 +153,24 @@ export const ThumbsUp = () => {
       onFrame: async () => {
         await hands.send({ image: videoElement });
       },
-      width: 640,
-      height: 480,
+      width: 300,
+      height: 300,
     });
     camera.start();
   }, []);
 
+  if (successCount > 5) {
+    return (
+      <div className="flex justify-center items-center text-center w-full">
+        Confirmed: you have hands!
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h2>Thumbs Up</h2>
-      <div className="text-lg">
-        {currentGesture && !takeOutOfFrame && (
-          <p>Make this: {gestureStrings[currentGesture]}</p>
-        )}
-        {takeOutOfFrame && <p>Take your hands out of the frame!</p>}
-      </div>
       <video
-        className="absolute"
+        className="w-full h-full"
         ref={videoRef}
         autoPlay
         muted

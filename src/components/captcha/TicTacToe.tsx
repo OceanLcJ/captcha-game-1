@@ -4,15 +4,23 @@ import Minimax from "tic-tac-toe-minimax";
 type Cell = "X" | "O" | null;
 
 interface TicTacToeProps {
+  setL: (paragraph: string) => void;
+  setP: (paragraph: string) => void;
+  setSuccess: (val: boolean) => void;
   mode: "easy" | "hard"; // easy plays randomly, hard plays minimax
 }
 
-export const TicTacToe = ({ mode }: TicTacToeProps) => {
+export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
   const [board, setBoard] = useState<Cell[][]>([
     [null, null, null],
     [null, null, null],
     [null, null, null],
   ]);
+
+  useEffect(() => {
+    setL("Tic Tac Toe");
+    setP("Beat the computer");
+  }, []);
 
   const [computerTurn, setComputerTurn] = useState(false);
 
@@ -60,6 +68,9 @@ export const TicTacToe = ({ mode }: TicTacToeProps) => {
 
   const playUserMove = async (i: number, j: number) => {
     const newBoard = board.map((r) => r.slice());
+    if (newBoard[i][j] !== null || computerTurn) {
+      return;
+    }
     newBoard[i][j] = "X";
     setBoard(newBoard);
     setComputerTurn(true);
@@ -69,6 +80,10 @@ export const TicTacToe = ({ mode }: TicTacToeProps) => {
     const runTurn = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500)); // wait for half a second
       const newBoard = board.map((r) => r.slice());
+
+      if (checkWinner(newBoard)) {
+        return;
+      }
 
       // play the computer's move
       if (mode === "easy") {
@@ -117,33 +132,61 @@ export const TicTacToe = ({ mode }: TicTacToeProps) => {
   const winner = checkWinner(board);
   const isDraw = board.flat().every((cell) => cell !== null) && !winner;
 
+  useEffect(() => {
+    if (winner) {
+      setSuccess(winner === "X");
+    }
+    if (isDraw) {
+      setSuccess(false);
+    }
+
+    if (winner === "O" || isDraw) {
+      setTimeout(() => {
+        setBoard([
+          [null, null, null],
+          [null, null, null],
+          [null, null, null],
+        ]);
+      }, 2000);
+    }
+  }, [winner, isDraw, setSuccess]);
+
   return (
-    <div>
-      <h2>Tic Tac Toe</h2>
-      {winner ? <p>{winner === "X" ? "You win!" : "Computer wins!"}</p> : null}
-      {isDraw ? <p>It's a draw!</p> : null}
-      <div>
-        {board.map((row, i) => (
-          <div key={i} className="flex border-collapse">
-            {row.map((cell, j) => (
-              <div
-                className={`w-12 h-12 border-r border-b border-solid border-black flex items-center justify-center text-2xl
+    <div className="relative h-full w-[350px]">
+      {/* Status */}
+      {!!(winner || isDraw) && (
+        <div className="absolute w-full h-full flex justify-center items-center">
+          <div className="bg-gray-400 w-32 h-32 flex justify-center items-center rounded">
+            {winner ? (winner === "X" ? "You win!" : "Computer wins!") : null}
+            {isDraw ? "It's a draw!" : null}
+          </div>
+        </div>
+      )}
+      <div className="p-3 h-full w-full">
+        <div className="h-full w-full flex flex-col">
+          {board.map((row, i) => (
+            <div key={i} className="flex flex-1 border-collapse">
+              {row.map((cell, j) => (
+                <div
+                  className={`flex-1 border-r border-b border-solid border-black flex items-center justify-center text-2xl
+                  ${cell === null && !computerTurn ? "cursor-pointer" : ""}
                   ${j === row.length - 1 ? "border-r-0" : ""} 
                   ${i === board.length - 1 ? "border-b-0" : ""}
                   ${i === 0 ? "border-t-0" : ""}
                   ${j === 0 ? "border-l-0" : ""}
                   ${computerTurn && "cursor-not-allowed pointer-events-none"}
                 `}
-                key={j}
-                onClick={() => {
-                  playUserMove(i, j);
-                }}
-              >
-                {cell}
-              </div>
-            ))}
-          </div>
-        ))}
+                  key={j}
+                  onClick={() => {
+                    playUserMove(i, j);
+                  }}
+                >
+                  {cell}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
