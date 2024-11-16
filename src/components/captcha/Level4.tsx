@@ -8,15 +8,20 @@ interface Props {
 }
 
 function Level4(props: Props) {
-    props.setP("");
-    props.setL("Slide image onto cutout");
+    props.setL("Slide image onto spot");
 
-    const [position, setPosition] = useState(0);
+    const [position, setPosition] = useState(75);
 
     const handleDrag = (e: React.MouseEvent) => {
         const slider = e.currentTarget.getBoundingClientRect();
         const newLeft = Math.max(0, Math.min(e.clientX - slider.left, slider.width));
         setPosition(newLeft);
+
+        if (newLeft >= 175 && newLeft <= 215) {
+            props.setSuccess(true);
+        } else {
+            props.setSuccess(false);
+        }
     };
 
     return (
@@ -38,7 +43,7 @@ function Level4(props: Props) {
                     <div
                         className="slider-thumb"
                         style={{left: `${position}px`}}
-                        onMouseDown={(e) => e.preventDefault()} // Prevent text selection on drag
+                        onMouseDown={(e) => e.preventDefault()}
                     />
                 </div>
             </div>
