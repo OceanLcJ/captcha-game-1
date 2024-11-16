@@ -13,7 +13,7 @@ export function SignUpPage(){
                 <h2>To continue, please create an account.</h2>
                 <LabelTextBox name={"EMAIL"}></LabelTextBox>
                 <LabelTextBox name={"PASSWORD"}></LabelTextBox>
-                <CaptchaButton></CaptchaButton>
+                <div className="login-captcha"><CaptchaButton /></div>
             </div>
         </>
     );

@@ -2,8 +2,10 @@ import './captcha-button.css'
 
 export function CaptchaButton(){
     return (
-        <label className='captcha-container'>
-            <input type="checkbox" className="checkbox" />
-        </label>
+        <div className="captcha-container">
+            <input type="checkbox" name="checkbox" className='captcha-checkbox'/>
+            <label htmlFor="checkbox"> I'm not a robot</label>
+            <img src="/public/images/RecaptchaLogo.png" className="recaptcha-logo"></img>
+        </div>
     );
 }

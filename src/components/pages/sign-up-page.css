@@ -59,3 +59,8 @@ h2 {
     margin-top: 20px;
     font-weight: normal;
 }
+
+.login-captcha {
+    margin-top: 40px;
+    width: 100%;
+}
