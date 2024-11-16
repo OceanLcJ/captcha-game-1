@@ -4,6 +4,7 @@ import Level2 from './captcha/Level2.tsx'
 import Level3 from './captcha/Level3.tsx'
 import Level4 from './captcha/Level4.tsx'
 import { useState } from 'react'
+import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
 
 interface Props {
     fade: string;
@@ -17,10 +18,16 @@ function Window(props: Props) {
     const [p, setP] = useState("");
     const [l, setL] = useState("");
 
-    const levels = [<Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-                    <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-                    <Level3 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-                    <Level4 setL={setL} setP={setP} setSuccess={setSuccess}/>];
+    const levels = [
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={0} />,
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={1} />,
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2} />,
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3} />,
+        <Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <Level3 setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <Level4 setL={setL} setP={setP} setSuccess={setSuccess}/>
+    ]
 
     const handleVerifyClick = () => {
         if (success) {
