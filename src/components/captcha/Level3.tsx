@@ -7,7 +7,7 @@ interface Props {
 }
 
 function Level3(props: Props) {
-    const correct = [6, 7];
+    const correct = [];
     props.setP("Select all the images with");
     props.setL("Stop Lights");
 
