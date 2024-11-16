@@ -2,6 +2,7 @@ import './Window.css'
 import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2.tsx'
 import Level3 from './captcha/Level3.tsx'
+import Level4 from './captcha/Level4.tsx'
 import { useState } from 'react'
 
 interface Props {
@@ -18,7 +19,8 @@ function Window(props: Props) {
 
     const levels = [<Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
                     <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-                    <Level3 setL={setL} setP={setP} setSuccess={setSuccess}/>];
+                    <Level3 setL={setL} setP={setP} setSuccess={setSuccess}/>,
+                    <Level4 setL={setL} setP={setP} setSuccess={setSuccess}/>];
 
     const handleVerifyClick = () => {
         if (success) {
