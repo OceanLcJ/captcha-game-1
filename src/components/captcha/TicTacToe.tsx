@@ -16,11 +16,17 @@ export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
     [null, null, null],
     [null, null, null],
   ]);
+  const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
-    setL("Tic Tac Toe");
-    setP("Beat the computer");
-  }, []);
+    if (mode === "easy") {
+      setL("Tic Tac Toe");
+      setP("Beat the computer");
+    } else {
+      setL("Tic Tac Toe");
+      setP("Beat the computer, but now it's really trying");
+    }
+  }, [mode]);
 
   const [computerTurn, setComputerTurn] = useState(false);
 
@@ -81,7 +87,10 @@ export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
       await new Promise((resolve) => setTimeout(resolve, 500)); // wait for half a second
       const newBoard = board.map((r) => r.slice());
 
-      if (checkWinner(newBoard)) {
+      if (
+        checkWinner(newBoard) ||
+        newBoard.flat().every((cell) => cell !== null)
+      ) {
         return;
       }
 
@@ -141,6 +150,7 @@ export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
     }
 
     if (winner === "O" || isDraw) {
+      setAttempts((prev) => prev + 1);
       setTimeout(() => {
         setBoard([
           [null, null, null],
@@ -150,6 +160,21 @@ export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
       }, 2000);
     }
   }, [winner, isDraw, setSuccess]);
+
+  useEffect(() => {
+    if (attempts >= 5) {
+      setSuccess(true);
+    }
+  }, [attempts, setSuccess]);
+
+  if (attempts >= 5) {
+    return (
+      <div className="relative h-full w-[350px] flex justify-center items-center text-center">
+        What's more human than trying again and again, with no hope of success
+        in sight? You can move onto the next level now.
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-full w-[350px]">

@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Star Wars';
+    src: url(/public/fonts/Starjhol.ttf);
+}
+
+nav {
+    display: flex;
+    background-color: rgba(22, 20, 50, 0.377);
+    width: 100vw;
+    padding: 5px 25px 10px 35px;
+}
+
+.logo-text {
+    font-family: 'Star Wars';
+    font-size: 3em;
+    font-weight: 300;
+    color:rgb(255, 187, 0);
+    text-shadow: 0 0 6px rgb(255, 187, 0);
+}
