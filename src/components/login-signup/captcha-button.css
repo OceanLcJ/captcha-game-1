@@ -81,3 +81,12 @@
     opacity: 1;
     transition-delay: 0;
 }
+.checkmark {
+    background-image: url(/public/animations/Checkmark.gif);
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 55px;
+    margin: -8px;
+    transform: scale(0.7);
+    background-size: auto;
+}

@@ -57,13 +57,19 @@ body{
 }
 
 h2 {
-    margin-top: 20px;
+    margin: 15px 0;
     font-weight: normal;
 }
 
 .login-captcha {
     margin-top: 40px;
     width: 100%;
+}
+
+.credential-textbox {
+    width: 100%;
+    margin-top: 25px;
+    align-self:first baseline;
 }
 
 .signup-button {

@@ -49,10 +49,10 @@ export function SignUpPage(){
             <div className="background-blur"></div>
             <div className='navbar'><Navbar /></div>
             <div className="center-container">
-                <h1 className='welcome-header'>Sign up</h1>
-                <h2>To continue, please create an account.</h2>
-                <LabelTextBox name={"Username"} isPassword={false}></LabelTextBox>
-                <LabelTextBox name={"Password"} isPassword={true}></LabelTextBox>
+                <h1 className='welcome-header'>Sign up/Login</h1>
+                <h2>Create a new username and password, or enter existing credentials.</h2>
+                <div className='credential-textbox'><LabelTextBox name={"Username"} isPassword={false}></LabelTextBox></div>
+                <div className='credential-textbox'><LabelTextBox name={"Password"} isPassword={true}></LabelTextBox></div>
                 <div className="login-captcha"><CaptchaButton /></div>
                 <button className="signup-button">
                     Create account
