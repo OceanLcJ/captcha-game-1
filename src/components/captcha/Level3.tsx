@@ -6,10 +6,10 @@ interface Props {
     setL: (paragraph: string) => void;
 }
 
-function Level2(props: Props) {
+function Level3(props: Props) {
     const correct = [6, 7];
     props.setP("Select all the images with");
-    props.setL("Traffic Lights");
+    props.setL("Stop Lights");
 
     return (
         <>
@@ -18,4 +18,4 @@ function Level2(props: Props) {
     );
 }
 
-export default Level2;
+export default Level3;
