@@ -1,0 +1,68 @@
+.window {
+    font-family: Roboto, sans-serif;
+    top: 15%;
+    left: 33%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    padding: 0.3rem;
+    width: 22%;
+    height: 70vh;
+    background-color: white;
+    border: solid 1px lightgray;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.window header {
+    display: flex;
+    flex-direction: column;
+    background-color: #488FE1;
+    color: white;
+    margin: 0.2rem 0.2rem 0 0.2rem;
+    padding: 1rem;
+    flex: 0 1 auto;
+    min-height: 10vh;
+}
+
+header p {
+    margin: 0.25rem 0 0.25rem 0;
+}
+
+header h2 {
+    margin: 0.25rem 0 0 0;
+    font-size: 2vw;
+}
+
+.window main {
+    display: flex;
+    height: 49vh;
+    background-color: #e8e8e8;
+    margin: 0.2rem;
+}
+
+.failure-message {
+    display: flex;
+    justify-content: center;
+    color: red;
+    padding: 0 0 0.5rem;
+}
+
+.window footer {
+    height: 5vh;
+    display: flex;
+    justify-content: right;
+    margin: 0 0.2rem 0.2rem 0;
+}
+
+.verify {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    color: white;
+    background-color: #488FE1;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    cursor: pointer;
+}
