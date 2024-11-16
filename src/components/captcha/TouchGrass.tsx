@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // Obviously, this is really bad practice to store the API key in the frontend, but I'm doing this for the sake of speed
 // I am going to disable this API key on Monday
@@ -48,12 +48,22 @@ const client = new Anthropic({
   dangerouslyAllowBrowser: true,
 });
 
-export const TouchGrass = () => {
+interface TouchGrassProps {
+  setL: (paragraph: string) => void;
+  setP: (paragraph: string) => void;
+  checkSuccessCallback: React.MutableRefObject<null | (() => Promise<boolean>)>;
+}
+
+export const TouchGrass = ({
+  setL,
+  setP,
+  checkSuccessCallback,
+}: TouchGrassProps) => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [score, setScore] = useState<ClaudeResponse | null>(null);
 
-  const getScore = async () => {
+  const getScore = useCallback(async () => {
     setLoading(true);
     setScore(null);
     try {
@@ -76,6 +86,13 @@ export const TouchGrass = () => {
       }
       setScore(response);
       setLoading(false);
+
+      if (response.score >= 8) {
+        await new Promise((resolve) => setTimeout(resolve, 10000)); // show the comment for a few seconds
+        return true;
+      }
+
+      return false;
     } catch (error) {
       if (error instanceof Anthropic.APIError) {
         console.error("API error:", error.message);
@@ -84,27 +101,40 @@ export const TouchGrass = () => {
       }
       throw error;
     }
-  };
+  }, [input]);
+
+  useEffect(() => {
+    setL("Touching Grass");
+    setP("Write a paragraph about why you enjoy");
+    checkSuccessCallback.current = getScore;
+  }, [checkSuccessCallback, getScore, setL, setP]);
 
   return (
-    <div>
-      <p>
-        Write a paragraph talking about how you enjoy touching grass. We will
-        rate your paragraph out of 10. You must get 8/10 to pass this level
-      </p>
+    <div className="w-[350px] flex flex-col">
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Why do you enjoy touching grass?"
+        className="w-full font-sans resize-none p-3 flex-1"
       />
-      <button onClick={getScore} disabled={loading}>
-        Verify
-      </button>
-      {loading && <p>Verifying...</p>}
       {score && (
-        <div>
-          <p>Score: {score.score}/10</p>
-          <p>Comment: {score.comment}</p>
+        <div className="p-3">
+          <div className="mb-2 flex justify-between">
+            <span
+              className={`font-bold ${
+                score.score >= 8 ? "text-green-400" : ""
+              }`}
+            >
+              {score.score}/10
+            </span>
+            <span className="text-gray-500">Get 8/10 to pass</span>
+          </div>
+          <p>{score.comment}</p>
+          {score.score >= 8 && (
+            <p className="mt-2 text-gray-500">
+              Moving to the next level in a few moments...
+            </p>
+          )}
         </div>
       )}
     </div>

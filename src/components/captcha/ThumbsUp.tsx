@@ -57,7 +57,7 @@ const knownGestures = [
   FistGesture,
 ];
 
-const gestureNames = ["five", "fist"];
+const gestureNames = ["five", "fist", "thumbs_up", "victory"];
 
 const gestureEstimator = new fp.GestureEstimator(knownGestures);
 
