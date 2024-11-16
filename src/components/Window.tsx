@@ -6,6 +6,7 @@ import { TicTacToe } from './captcha/TicTacToe.tsx';
 import { ThumbsUp } from './captcha/ThumbsUp.tsx';
 import { ExitVim } from './captcha/ExitVim.tsx';
 import { TouchGrass } from './captcha/TouchGrass.tsx';
+import { MovingCheck } from './captcha/MovingCheck.tsx';
 
 interface Props {
     fade: string;
@@ -24,6 +25,7 @@ function Window(props: Props) {
     const levels = [
         <Level1 setL={setL} setP={setP} setSuccess={setSuccess} />,
         <Level2 setL={setL} setP={setP} setSuccess={setSuccess} />,
+        <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess} />,
         // <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode="easy" />,
         // <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess} />,
             <TouchGrass
