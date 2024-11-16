@@ -2,6 +2,9 @@ import './Window.css'
 import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2'
 import { useState } from 'react'
+import { TicTacToe } from './captcha/TicTacToe.tsx';
+import { ThumbsUp } from './captcha/ThumbsUp.tsx';
+import { ExitVim } from './captcha/ExitVim.tsx';
 
 interface Props {
     fade: string;
@@ -15,8 +18,13 @@ function Window(props: Props) {
     const [p, setP] = useState("");
     const [l, setL] = useState("");
 
-    const levels = [<Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-                    <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>];
+    const levels = [
+        <Level1 setL={setL} setP={setP} setSuccess={setSuccess} />,
+        <Level2 setL={setL} setP={setP} setSuccess={setSuccess} />,
+        <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode="easy" />,
+        <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess} />,
+        <ExitVim setL={setL} setP={setP} setSuccess={setSuccess} />,
+    ];
 
     const handleVerifyClick = () => {
         if (success) {
