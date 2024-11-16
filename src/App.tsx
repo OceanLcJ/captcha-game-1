@@ -1,12 +1,12 @@
 import './App.css'
-import Window from './components/Window'
+import './components/pages/sign-up-page.tsx'
+import { SignUpPage } from './components/pages/sign-up-page.tsx'
 
 function App() {
 
   return (
     <>
-        <h1>Hello</h1>
-        <Window/>
+      <SignUpPage/>
     </>
   )
 }

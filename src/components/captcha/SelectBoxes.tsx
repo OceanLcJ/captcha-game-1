@@ -9,14 +9,28 @@ interface Props {
 
 function Level1(props: Props) {
     const [activeSections, setActiveSections] = useState(Array(16).fill(false));
+    const maxWrongAllowed = 2;
 
     const toggleActive = (index: number) => {
         const newStates = [...activeSections];
         newStates[index] = !newStates[index];
         setActiveSections(newStates);
 
-        const combination = props.correct.every((idx) => newStates[idx]); //compare indexes to correct
-        props.setSuccess(combination);
+        let wrongSelections = 0;
+        newStates.forEach((isActive, i) => {
+            if (isActive && !props.correct.includes(i)) {
+                wrongSelections++;
+            } else if (!isActive && props.correct.includes(i)) {
+                wrongSelections++;
+            }
+        });
+
+        if (wrongSelections <= maxWrongAllowed) {
+            const combination = props.correct.every((idx) => newStates[idx]);
+            props.setSuccess(combination);
+        } else {
+            props.setSuccess(false);
+        }
     };
 
     return (
@@ -34,4 +48,4 @@ function Level1(props: Props) {
     );
 }
 
-export default Level1
+export default Level1;
