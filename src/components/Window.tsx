@@ -3,7 +3,11 @@ import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2'
 import { useState } from 'react'
 
-function Window() {
+interface Props {
+    fade: string;
+}
+
+function Window(props: Props) {
     const [success, setSuccess] = useState(false);
     const [index, setIndex] = useState(0);
     const [showFailureMessage, setShowFailureMessage] = useState(false);
@@ -31,7 +35,7 @@ function Window() {
     };
 
     return (
-        <div className="window">
+        <div className={"window " + props.fade}>
             <header className="title">
                 <p>{p}</p>
                 <h2>{l}</h2>
