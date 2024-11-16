@@ -162,16 +162,16 @@ export const TicTacToe = ({ setL, setP, setSuccess, mode }: TicTacToeProps) => {
   }, [winner, isDraw, setSuccess]);
 
   useEffect(() => {
-    if (attempts >= 5) {
+    if (attempts >= 3) {
       setSuccess(true);
     }
   }, [attempts, setSuccess]);
 
-  if (attempts >= 5) {
+  if (attempts >= 3) {
     return (
       <div className="relative h-full w-[350px] flex justify-center items-center text-center">
         What's more human than trying again and again, with no hope of success
-        in sight? You can move onto the next level now.
+        in sight? You can move onto the next level.
       </div>
     );
   }
