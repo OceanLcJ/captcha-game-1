@@ -1,6 +1,9 @@
 run flask:
 - activate enviroment
-> export FLASK_APP=run.py
+- mac/linux:
+	> export FLASK_APP=run.py
+- window:
+	> set FLASK_APP=run.py
 > flask run --debug
 --------------------------------
 
