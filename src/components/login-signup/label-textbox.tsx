@@ -6,9 +6,9 @@ interface Props {
 
 export function LabelTextBox(props: Props) {
     return (
-        <>
+        <div className="container">
             <p>{props.name}</p>
-            <input></input>
-        </>
+            <input className='text-input'></input>
+        </div>
     );
 }

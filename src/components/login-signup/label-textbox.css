@@ -1,3 +1,11 @@
+.container{
+    width: 100%;
+    margin-top: 30px;
+}
 p{
     align-self: flex-start;
+}
+.text-input{
+    width: 100%;
+    height: 40px;
 }
