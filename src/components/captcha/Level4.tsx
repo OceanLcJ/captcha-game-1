@@ -1,5 +1,5 @@
-import './Level4.css'
-import React, {useState} from "react";
+import "./Level4.css";
+import React, { useState, useEffect } from "react";
 
 interface Props {
     setSuccess: (val: boolean) => void;
@@ -8,12 +8,16 @@ interface Props {
 }
 
 function Level4(props: Props) {
-    props.setL("Slide image onto spot");
+    props.setP("");
+    props.setL("Slide image onto cutout");
 
-    const [position, setPosition] = useState(75);
+    const [position, setPosition] = useState(50);
+    const [isDragging, setIsDragging] = useState(false);
 
-    const handleDrag = (e: React.MouseEvent) => {
-        const slider = e.currentTarget.getBoundingClientRect();
+    const handleMouseMove = (e: MouseEvent) => {
+        if (!isDragging) return;
+
+        const slider = document.querySelector(".slider-track")!.getBoundingClientRect();
         const newLeft = Math.max(0, Math.min(e.clientX - slider.left, slider.width));
         setPosition(newLeft);
 
@@ -24,25 +28,51 @@ function Level4(props: Props) {
         }
     };
 
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        setIsDragging(true);
+        e.preventDefault();
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener("mousemove", handleMouseMove);
+            window.addEventListener("mouseup", handleMouseUp);
+        } else {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
+        }
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isDragging]);
+
     return (
         <div className="level4">
-
             <img
                 src={"/public/car.png"}
                 alt={"car"}
                 style={{
                     position: "absolute",
                     left: `${position}px`,
-                    bottom: "55px",
+                    bottom: "60px",
                     transform: "translateX(-50%)",
                 }}
             />
 
             <div className="slider-container">
-                <div className="slider-track" onMouseDown={(e) => handleDrag(e)}>
+                <div
+                    className="slider-track"
+                    onMouseDown={handleMouseDown}>
+
                     <div
                         className="slider-thumb"
-                        style={{left: `${position}px`}}
+                        style={{ left: `${position}px` }}
                         onMouseDown={(e) => e.preventDefault()}
                     />
                 </div>
