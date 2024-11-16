@@ -11,9 +11,10 @@ export function SignUpPage(){
             <div className="center-container">
                 <h1>Sign up</h1>
                 <h2>To continue, please create an account.</h2>
-                <LabelTextBox name={"EMAIL"}></LabelTextBox>
+                <LabelTextBox name={"USERNAME"}></LabelTextBox>
                 <LabelTextBox name={"PASSWORD"}></LabelTextBox>
                 <div className="login-captcha"><CaptchaButton /></div>
+                <button className="signup-button">Sign up</button>
             </div>
         </>
     );

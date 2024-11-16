@@ -64,3 +64,9 @@ h2 {
     margin-top: 40px;
     width: 100%;
 }
+
+.signup-button {
+    justify-self: flex-end;
+    width: 70%;
+    height: 80px;
+}
