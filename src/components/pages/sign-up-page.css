@@ -17,7 +17,6 @@ body{
     background-size: max(100vh, 100vw);
     width: 100vw;
     height: 100vh;
-    filter: brightness(0.8);
 }
 
 .background-blur {
@@ -28,6 +27,7 @@ body{
     height: 100%;
     background-color: rgb(0, 0, 0, 0.2);
     backdrop-filter: blur(4px);
+    filter: brightness(0.8);
 }
 
 .center-container {
@@ -39,24 +39,25 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;    
-    padding: 30px 40px;
+    padding: 0 40px;
     
     width: 30vw;
-    height: 75vh;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.336);
 }
 
-h1 {
+.welcome-header {
     font-family:Helvetica, Arial, sans-serif;
     font-weight: 600;
     font-size: 2.2em;
     color: rgb(24, 24, 24);
+    vertical-align: bottom;
+    margin-top: 35px
 }
 
 h2 {
-    margin-top: 20px;
+    margin: 15px 0;
     font-weight: normal;
 }
 
@@ -65,8 +66,28 @@ h2 {
     width: 100%;
 }
 
+.credential-textbox {
+    width: 100%;
+    margin-top: 25px;
+    align-self:first baseline;
+}
+
 .signup-button {
     justify-self: flex-end;
-    width: 70%;
-    height: 80px;
+    margin-top:30px;
+    width: 90%;
+    height: 70px;
+    border-style: none;
+    border-radius: 50px;
+    background: rgb(68,2,128);
+    background: linear-gradient(90deg, rgb(81, 2, 155) 0%, rgba(79,12,176,1) 24%);
+                    
+    color:white;
+    font-size: 1.2em;
+    font-family:Helvetica, Arial, sans-serif;
+    margin: 40px 0;
+}
+
+.navbar {
+    position: fixed;
 }
