@@ -74,12 +74,12 @@ h2 {
     border-style: none;
     border-radius: 50px;
     background: rgb(68,2,128);
-    background: linear-gradient(90deg, rgba(68,2,128,1) 0%, rgba(73,10,164,1) 100%);
-                
+    background: linear-gradient(90deg, rgb(81, 2, 155) 0%, rgba(79,12,176,1) 24%);
+                    
     color:white;
     font-size: 1.2em;
     font-family:Helvetica, Arial, sans-serif;
-    margin: 42px 0;
+    margin: 40px 0;
 }
 
 .navbar {
