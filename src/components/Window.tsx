@@ -1,13 +1,20 @@
 import './Window.css'
-import Level1 from './captcha/Level1.tsx'
-import Level2 from './captcha/Level2.tsx'
-import Level3 from './captcha/Level3.tsx'
-import Level4 from './captcha/Level4.tsx'
-import Poly from './captcha/Poly.tsx'
-import Waldo from './captcha/Waldo.tsx'
 import { useState } from 'react'
-import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
+
+import CountBalls from "./captcha/CountBalls.tsx";
+import CrossingGrid from './captcha/CrossingGrid.tsx'
+import { ExitVim } from './captcha/ExitVim.tsx'
+import {MovingCheck} from "./captcha/MovingCheck.tsx";
+import Poly from './captcha/Poly.tsx'
 import { RotatingEmail } from './captcha/RotatingEmail.tsx'
+import Slide from './captcha/Slide.tsx'
+import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
+import StopSignGrid from './captcha/StopSignGrid.tsx'
+import {TicTacToe} from "./captcha/TicTacToe.tsx";
+import {ThumbsUp} from "./captcha/ThumbsUp.tsx";
+import {TouchGrass} from "./captcha/TouchGrass.tsx";
+import TrafficGrid from './captcha/TrafficGrid.tsx'
+import Waldo from './captcha/Waldo.tsx'
 
 interface Props {
     fade: string;
@@ -23,18 +30,25 @@ function Window(props: Props) {
     const [l, setL] = useState("");
 
     const levels = [
-        <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Poly setL={setL} setP={setP} setSuccess={setSuccess} />,
-        <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username} />,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={0} />,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={1} />,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2} />,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3} />,
-        <Level1 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Level2 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Level3 setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Level4 setL={setL} setP={setP} setSuccess={setSuccess}/>
+        <CrossingGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
     ]
+
+    //     <TrafficGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <Slide setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"easy"}/>,
+    //     <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2}/>,
+    //     <Poly setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //
+    //     <CountBalls setL={setL} setP={setP} setSuccess={setSuccess} />,
+    //     <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //     <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"}/>,
+    //     <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
+    //
+    //     <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={1}/>,
+    //     <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
 
     const handleVerifyClick = () => {
         if (success) {

@@ -1,4 +1,4 @@
-import SelectBoxes from "./SelectBoxes";
+import SelectBoxes from "../SelectBoxes.tsx";
 
 interface Props {
     setSuccess: (val: boolean) => void;
@@ -6,7 +6,7 @@ interface Props {
     setL: (paragraph: string) => void;
 }
 
-function Level2(props: Props) {
+function TrafficGrid(props: Props) {
     const correct = [1, 2, 5, 6];
     props.setP("Select all the images with");
     props.setL("Traffic Lights");
@@ -18,4 +18,4 @@ function Level2(props: Props) {
     );
 }
 
-export default Level2;
+export default TrafficGrid;
