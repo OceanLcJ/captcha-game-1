@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_login import UserMixin
 from datetime import datetime
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from flask import request
 
 # =============
@@ -63,10 +63,13 @@ def load_user(user_id):
 def unauthorized():
     return jsonify({"message": "Authentication required"}), 403
 
-@app.route('/')
-def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('../../dist', path)
 
+@app.route('/')
+def serve():
+    return send_from_directory('../../dist', 'index.html')
 
 @app.route("/api/me", methods=['GET'])
 @login_required
@@ -93,7 +96,7 @@ def leaderboard():
     'username': user.username,
     'highScoreMin': User.HS_min(user),
     'highScoreSec': User.HS_sec(user),
-    'highScoreDate': user.highScoreDate,
+    'highScoreDate': user.highScoreDate
   } for user in users])
 
 @app.route("/api/login", methods=['POST'])
@@ -106,14 +109,14 @@ def login():
 
 	if user:
 		if bcrypt.check_password_hash(user.pw, pw):
-			login_user(user, rememeber=True)
+			login_user(user, remember=True)
 			if score < user.highScore: # low score is better
 				user.highScore = score
 				user.highScoreDate = datetime.utcnow()
 				db.session.commit()
-			return "true"
+			return "user loged in"
 		else:
-			return "false"
+			return "wrong pw"
 	else:
 		# create a new user
 		new_user = User(username=username,
@@ -123,9 +126,12 @@ def login():
 		db.session.add(new_user)
 		db.session.commit()
 		login_user(new_user, remember=True)
-		return "true"
+		return "user created"
 
 @app.route("/api/logout")
 def logout():
-  logout_user()
-  return "true"
+    if current_user is None:
+        return "no user is logged in"
+    else:
+        logout_user()
+        return "user logged out"

@@ -13,6 +13,22 @@ function GetCheckmarkDiv(captchaComplete: boolean, click: () => void) {
             </>
         );
     }
+function GetCheckmarkDiv(captchaComplete: boolean, click: () => void) {
+  if (captchaComplete) {
+    return <div className="checkmark"></div>;
+  } else {
+    return (
+      <>
+        <input
+          type="checkbox"
+          id="checkbox"
+          className="captcha-checkbox"
+          onClick={click}
+        />
+        <div className="reload-anim"></div>
+      </>
+    );
+  }
 }
 
 interface Props {
