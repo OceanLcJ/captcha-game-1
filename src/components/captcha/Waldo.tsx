@@ -13,7 +13,7 @@ function Waldo(props: Props) {
 
     return (
         <>
-            <SelectBoxes setSuccess={props.setSuccess} img={"Waldo.jpeg"} correct={correct}/>
+            <SelectBoxes setSuccess={props.setSuccess} img={"waldo.jpeg"} correct={correct}/>
         </>
     );
 }
