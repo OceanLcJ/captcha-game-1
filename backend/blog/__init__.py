@@ -78,6 +78,12 @@ def serve_public(path):
 @app.route("/api/me", methods=['GET'])
 @login_required
 def me():
+  return jsonify({
+    'username': current_user.username,
+    'highScoreMin': User.HS_min(current_user),
+    'highScoreSec': User.HS_sec(current_user),
+    'highScoreDate': current_user.highScoreDate,
+  })
 
 # POST /api/login
 # {

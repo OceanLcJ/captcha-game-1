@@ -16,6 +16,8 @@ import { TouchGrass } from "./captcha/TouchGrass.tsx";
 import TrafficGrid from "./captcha/TrafficGrid.tsx";
 import Waldo from "./captcha/Waldo.tsx";
 
+const IS_DEMO = false;
+
 interface Props {
   fade: string;
   username: string;
@@ -39,17 +41,25 @@ function Window(props: Props) {
     <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess} />,
     <Slide setL={setL} setP={setP} setSuccess={setSuccess} />,
     <Waldo setL={setL} setP={setP} setSuccess={setSuccess} />,
-    // <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"} />,
+    !IS_DEMO && (
+      <TicTacToe
+        setL={setL}
+        setP={setP}
+        setSuccess={setSuccess}
+        mode={"hard"}
+      />
+    ),
     <Poly setL={setL} setP={setP} setSuccess={setSuccess} />,
-    <SpeechRecognition
-      setL={setL}
-      setP={setP}
-      setSuccess={setSuccess}
-      index={0}
-    />,
-    // <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3}/>,
+    IS_DEMO && (
+      <SpeechRecognition
+        setL={setL}
+        setP={setP}
+        setSuccess={setSuccess}
+        index={0}
+      />
+    ),
     <CountBalls setL={setL} setP={setP} setSuccess={setSuccess} />,
-    <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess} />,
+    IS_DEMO && <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess} />,
     <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess} />,
     <ExitVim setL={setL} setP={setP} setSuccess={setSuccess} />,
     <TouchGrass
@@ -63,7 +73,7 @@ function Window(props: Props) {
       setSuccess={setSuccess}
       username={props.username}
     />,
-  ];
+  ].filter(Boolean);
 
   const handleVerifyClick = async () => {
     setVerifying(true);
