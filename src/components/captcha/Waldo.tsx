@@ -1,4 +1,4 @@
-import SelectBoxes from "./SelectBoxes";
+import SelectBoxes from "../SelectBoxes.tsx";
 
 interface Props {
     setSuccess: (val: boolean) => void;

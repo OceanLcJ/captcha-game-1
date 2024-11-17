@@ -1,4 +1,4 @@
-import SelectBoxes from "./SelectBoxes";
+import SelectBoxes from "../SelectBoxes.tsx";
 
 interface Props {
     setSuccess: (val: boolean) => void;
@@ -6,7 +6,7 @@ interface Props {
     setL: (paragraph: string) => void;
 }
 
-function Level3(props: Props) {
+function StopSignGrid(props: Props) {
     const correct = [];
     props.setP("Select all the images with");
     props.setL("Stop Lights");
@@ -18,4 +18,4 @@ function Level3(props: Props) {
     );
 }
 
-export default Level3;
+export default StopSignGrid;
