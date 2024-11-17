@@ -1,4 +1,4 @@
-import "./Level4.css";
+import "./Slide.css";
 import React, { useState, useEffect } from "react";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     setL: (paragraph: string) => void;
 }
 
-function Level4(props: Props) {
+function Slide(props: Props) {
     props.setL("Slide image onto cutout");
 
     const [position, setPosition] = useState(50);
@@ -80,4 +80,4 @@ function Level4(props: Props) {
     );
 }
 
-export default Level4;
+export default Slide;

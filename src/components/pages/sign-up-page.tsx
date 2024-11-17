@@ -75,7 +75,7 @@ export function SignUpPage(){
                 <h2>Create a new username and password, or enter existing credentials.</h2>
                 <div className='credential-textbox'><LabelTextBox onChange={setUsername} value={username} name={"Username"} isPassword={false}></LabelTextBox></div>
                 <div className='credential-textbox'><LabelTextBox onChange={setPassword} value={password} name={"Password"} isPassword={true}></LabelTextBox></div>
-                <div className="login-captcha" onClick={toggleWindow}><CaptchaButton /></div>
+                <div className="login-captcha"><CaptchaButton click={toggleWindow}/></div>
                 <button className="signup-button">
                     Create account
                 </button>
