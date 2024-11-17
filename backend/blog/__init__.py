@@ -90,7 +90,7 @@ def login():
 
 	if user:
 		if bcrypt.check_password_hash(user.pw, pw):
-			login_user(user)
+			login_user(user, rememeber=True)
 			if score < user.highScore: # low score is better
 				user.highScore = score
 				user.highScoreDate = datetime.utcnow()
