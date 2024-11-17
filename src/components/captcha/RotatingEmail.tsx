@@ -14,7 +14,7 @@ export const RotatingEmail = ({
   setL,
 }: RotatingEmailProps) => {
   useEffect(() => {
-    setP("Use the keyboard buttons");
+    setP("Last step");
     setL("Confirm your username");
   }, []);
   const [input, setInput] = useState("");

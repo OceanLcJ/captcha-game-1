@@ -8,12 +8,7 @@ interface SpeechRecognitionProps {
   setSuccess: (val: boolean) => void;
 }
 
-const TOUNGUE_TWISTERS = [
-  "How can a clam cram in a clean cream can?",
-  "If he chews shoes, whose shoes does he choose?",
-  "She sells seashells by the seashore.",
-  "Peter Piper picked a peck of pickled peppers.",
-];
+const TOUNGUE_TWISTERS = ["I am definitely not a robot."];
 
 export const SpeechRecognition = ({
   index,

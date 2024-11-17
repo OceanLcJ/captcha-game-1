@@ -44,9 +44,12 @@ export function LeaderboardPage(props: Props) {
         <div className="hero-text">
           <h1>Congrats!</h1>
           <h2>You have successfully signed in.</h2>
-          <button className="bg-blue-400 mt-5" onClick={signout}>
+          <div
+            className="bg-blue-400 mt-5 p-5 rounded cursor-pointer"
+            onClick={signout}
+          >
             Sign out
-          </button>
+          </div>
         </div>
       </div>
       <div className="leaderboard-content">
