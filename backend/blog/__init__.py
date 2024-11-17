@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_login import UserMixin
 from datetime import datetime
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from flask import request
 
 # =============
@@ -76,8 +76,8 @@ def leaderboard():
   users = User.query.order_by(User.highScore.asc()).all()
   return jsonify([{
     'username': user.username,
-    'highScoreMin': HS_min(user)
-    'highScoreSec': HS_sec(user)
+    'highScoreMin': User.HS_min(user),
+    'highScoreSec': User.HS_sec(user),
     'highScoreDate': user.highScoreDate
   } for user in users])
 
@@ -91,14 +91,14 @@ def login():
 
 	if user:
 		if bcrypt.check_password_hash(user.pw, pw):
-			login_user(user, rememeber=True)
+			login_user(user, remember=True)
 			if score < user.highScore: # low score is better
 				user.highScore = score
 				user.highScoreDate = datetime.utcnow()
 				db.session.commit()
-			return "true"
+			return "user loged in"
 		else:
-			return "false"
+			return "wrong pw"
 	else:
 		# create a new user
 		new_user = User(username=username,
@@ -108,7 +108,7 @@ def login():
 		db.session.add(new_user)
 		db.session.commit()
 		login_user(new_user, remember=True)
-		return "true"
+		return "user created"
 
 @app.route("/api/logout")
 def logout():
