@@ -71,6 +71,10 @@ def serve_static(path):
 def serve():
     return send_from_directory('../../dist', 'index.html')
 
+@app.route('/public/<path:path>')
+def serve_public(path):
+    return send_from_directory('../../dist', path)
+
 @app.route("/api/me", methods=['GET'])
 @login_required
 def me():
