@@ -1,14 +1,15 @@
-import { LabelTextBox } from '../login-signup/label-textbox';
-import { CaptchaButton } from '../login-signup/captcha-button';
+import {LabelTextBox} from '../login-signup/label-textbox';
+import {CaptchaButton} from '../login-signup/captcha-button';
 import './sign-up-page.css';
 import Window from './../Window.tsx';
 import {useEffect, useState} from "react";
-import { Navbar } from '../login-signup/navbar';
+import {Navbar} from '../login-signup/navbar';
 
 type signUpFormData = {
     username: string,
     pw: string,
     highScore: number
+    updateStart: () => void
 };
 
 const signUpForm = () => {
@@ -21,17 +22,17 @@ const signUpForm = () => {
 
             // endpoint would go here vv
 
-             const response = await fetch("https://127.0.0.1:5000/signup", {
-                 method: "POST",
-                 headers: {
-                     "Content-Type": "application/json",
-                 },
-                 body: JSON.stringify(formData),
-             });
-             if (!response.ok) {
-                 throw new Error("Failed to submit form");
-             }
-             return response.json();
+            const response = await fetch("https://127.0.0.1:5000/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+            if (!response.ok) {
+                throw new Error("Failed to submit form");
+            }
+            return response.json();
         },
     });
 
@@ -45,9 +46,20 @@ const signUpForm = () => {
     };
 }
 
-export function SignUpPage(){
+interface Props {
+    updateStart: () => void;
+    toggleScreen: () => void
+}
+
+export function SignUpPage(props: Props) {
     const [window, setWindow] = useState(false);
     const [fadeClass, setFadeClass] = useState("hidden");
+
+    const [captchaComplete, setCaptchaComplete] = useState(false)
+
+    function HandleCheckmarkClick() {
+        setCaptchaComplete(!captchaComplete);
+    }
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -69,18 +81,25 @@ export function SignUpPage(){
     return (
         <div className="background-image">
             <div className="background-blur"></div>
-            <div className='navbar'><Navbar /></div>
+            <div className='navbar'><Navbar/></div>
             <div className="center-container">
                 <h1 className='welcome-header'>Sign up/Login</h1>
                 <h2>Create a new username and password, or enter existing credentials.</h2>
-                <div className='credential-textbox'><LabelTextBox onChange={setUsername} value={username} name={"Username"} isPassword={false}></LabelTextBox></div>
-                <div className='credential-textbox'><LabelTextBox onChange={setPassword} value={password} name={"Password"} isPassword={true}></LabelTextBox></div>
-                <div className="login-captcha"><CaptchaButton click={toggleWindow}/></div>
-                <button className="signup-button">
+                <div className='credential-textbox'><LabelTextBox onChange={setUsername} value={username}
+                                                                  name={"Username"} isPassword={false}></LabelTextBox>
+                </div>
+                <div className='credential-textbox'><LabelTextBox onChange={setPassword} value={password}
+                                                                  name={"Password"} isPassword={true}></LabelTextBox>
+                </div>
+                <div className="login-captcha"><CaptchaButton captchaComplete={captchaComplete}
+                                                              updateStart={props.updateStart} click={toggleWindow}/></div>
+                <button className={captchaComplete ? "signup-button signup-button-active" : "signup-button"}
+                        onClick={captchaComplete ? props.toggleScreen : props.toggleScreen}>
                     Create account
                 </button>
             </div>
-            {window && <Window fade={fadeClass} username={username} />}
+            {window && <Window fade={fadeClass} username={username} handleCaptchaClick={HandleCheckmarkClick}
+                               toggleWindow={toggleWindow}/>}
         </div>
     );
 }

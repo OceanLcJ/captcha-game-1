@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import './captcha-button.css'
 
-function GetCheckmarkDiv(captchaComplete: boolean, click: () => void){
-    if(captchaComplete) {
+function GetCheckmarkDiv(captchaComplete: boolean, click: () => void) {
+    if (captchaComplete) {
         return (
             <div className='checkmark'></div>
         );
-    }
-    else{
+    } else {
         return (
             <>
                 <input type="checkbox" id="checkbox" className='captcha-checkbox' onClick={click}/>
@@ -19,19 +17,15 @@ function GetCheckmarkDiv(captchaComplete: boolean, click: () => void){
 
 interface Props {
     click: () => void;
+    updateStart: () => void;
+    captchaComplete: boolean;
 }
 
 export function CaptchaButton(props: Props) {
-    const [captchaComplete, setCaptchaComplete] = useState(false)
-
-    function HandleCheckmarkClick(){
-        setCaptchaComplete(!captchaComplete);
-    }
-
     return (
         <div className="captcha-container">
-            <div className='checkbox-text-container' >
-                {GetCheckmarkDiv(captchaComplete, props.click)}
+            <div className='checkbox-text-container'>
+                {GetCheckmarkDiv(props.captchaComplete, props.click)}
                 <label htmlFor="checkbox">I'm not a robot</label>
             </div>
             <img src="/public/images/RecaptchaLogo.png" className="recaptcha-logo"></img>

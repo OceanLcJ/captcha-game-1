@@ -1,14 +1,14 @@
 import './Window.css'
-import { useState } from 'react'
+import {useState} from 'react'
 
 import CountBalls from "./captcha/CountBalls.tsx";
 import CrossingGrid from './captcha/CrossingGrid.tsx'
-import { ExitVim } from './captcha/ExitVim.tsx'
+import {ExitVim} from './captcha/ExitVim.tsx'
 import {MovingCheck} from "./captcha/MovingCheck.tsx";
 import Poly from './captcha/Poly.tsx'
-import { RotatingEmail } from './captcha/RotatingEmail.tsx'
+import {RotatingEmail} from './captcha/RotatingEmail.tsx'
 import Slide from './captcha/Slide.tsx'
-import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
+import {SpeechRecognition} from './captcha/SpeechRecognition.tsx'
 import StopSignGrid from './captcha/StopSignGrid.tsx'
 import {TicTacToe} from "./captcha/TicTacToe.tsx";
 import {ThumbsUp} from "./captcha/ThumbsUp.tsx";
@@ -17,8 +17,10 @@ import TrafficGrid from './captcha/TrafficGrid.tsx'
 import Waldo from './captcha/Waldo.tsx'
 
 interface Props {
-    fade: string;
-    username: string;
+    fade: string,
+    username: string,
+    toggleWindow: () => void,
+    handleCaptchaClick: () => void
 }
 
 function Window(props: Props) {
@@ -31,19 +33,19 @@ function Window(props: Props) {
 
     const levels = [
         <CrossingGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <TrafficGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Slide setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"}/>,
-        <Poly setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2}/>,
-        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3}/>,
-        <CountBalls setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
+        // <TrafficGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <Slide setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"}/>,
+        // <Poly setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2}/>,
+        // <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3}/>,
+        // <CountBalls setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        // <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
     ]
 
     const handleVerifyClick = () => {
@@ -51,7 +53,8 @@ function Window(props: Props) {
             if (index < levels.length - 1) {
                 setIndex(index + 1);
             } else {
-                alert("End of levels, direct to leaderboard");
+                props.handleCaptchaClick();
+                props.toggleWindow();
             }
         } else {
             setShowFailureMessage(true);
