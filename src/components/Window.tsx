@@ -16,7 +16,7 @@ import { TouchGrass } from "./captcha/TouchGrass.tsx";
 import TrafficGrid from "./captcha/TrafficGrid.tsx";
 import Waldo from "./captcha/Waldo.tsx";
 
-const IS_DEMO = false;
+const IS_DEMO = true;
 
 interface Props {
   fade: string;
