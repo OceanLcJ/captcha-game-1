@@ -4,6 +4,7 @@ import Level1 from './captcha/Level1.tsx'
 import Level2 from './captcha/Level2.tsx'
 import Level3 from './captcha/Level3.tsx'
 import Level4 from './captcha/Level4.tsx'
+import CountBalls from './captcha/CountBalls.tsx'
 import { useState } from 'react'
 import { SpeechRecognition } from './captcha/SpeechRecognition.tsx'
 import { RotatingEmail } from './captcha/RotatingEmail.tsx'
@@ -22,6 +23,7 @@ function Window(props: Props) {
     const [l, setL] = useState("");
 
     const levels = [
+        <CountBalls setL={setL} setP={setP} setSuccess={setSuccess}/>,
         <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username} />,
         <Poly setL={setL} setP={setP} setSuccess={setSuccess} />,
         <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={0} />,

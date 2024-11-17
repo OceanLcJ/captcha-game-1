@@ -1,0 +1,50 @@
+.count-balls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 350px;
+    height: 100%;
+}
+
+.track {
+    height: 85%;
+    position: relative;
+}
+
+.ball {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2885ef;
+    transition: left 0.1s linear, top 0.1s linear;
+    outline: 4px solid #203dff;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.current {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
