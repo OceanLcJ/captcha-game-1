@@ -49,7 +49,7 @@ export function LeaderboardPage(props: Props) {
           </button>
         </div>
       </div>
-      <div className="content">
+      <div className="leaderboard-content">
         <h2>
           Your fastest time is: {props.user.highScoreMin}:
           {props.user.highScoreSec} on {props.user.highScoreDate}

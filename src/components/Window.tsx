@@ -1,5 +1,5 @@
 import './Window.css'
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 import CountBalls from "./captcha/CountBalls.tsx";
 import CrossingGrid from './captcha/CrossingGrid.tsx'
@@ -27,9 +27,11 @@ function Window(props: Props) {
     const [success, setSuccess] = useState(false);
     const [index, setIndex] = useState(0);
     const [showFailureMessage, setShowFailureMessage] = useState(false);
+    const [verifying, setVerifying] = useState(false);
 
     const [p, setP] = useState("");
     const [l, setL] = useState("");
+    const checkSuccessCallback = useRef<null | (() => Promise<boolean>)>(null);
 
     const levels = [
         <CrossingGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
@@ -45,11 +47,19 @@ function Window(props: Props) {
         <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
         <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
         <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <TouchGrass setL={setL} setP={setP} checkSuccessCallback={checkSuccessCallback}/>,
         <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
     ]
 
-    const handleVerifyClick = () => {
-        if (success) {
+    const handleVerifyClick = async () => {
+      setVerifying(true);
+      const isSuccess = 
+          typeof checkSuccessCallback.current === "function" ?
+          await checkSuccessCallback.current() :
+          success;
+      setVerifying(false);
+      
+      if (isSuccess) {
             if (index < levels.length - 1) {
                 setIndex(index + 1);
             } else {
@@ -64,6 +74,13 @@ function Window(props: Props) {
             }, 2000);
         }
     };
+
+
+    // reset the checkSuccessCallback when the index changes
+    useEffect(() => {
+      checkSuccessCallback.current = null;
+  }, [index])
+
 
     return (
         <div className={"window " + props.fade}>
@@ -84,7 +101,8 @@ function Window(props: Props) {
 
             <footer>
                 <div className="verify" onClick={handleVerifyClick}>
-                    Verify
+                    {verifying ? "Verifying..." : "Verify"}
+
                 </div>
             </footer>
         </div>
