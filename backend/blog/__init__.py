@@ -112,5 +112,8 @@ def login():
 
 @app.route("/api/logout")
 def logout():
-  logout_user()
-  return "true"
+    if current_user is None:
+        return "no user is logged in"
+    else:
+        logout_user()
+        return "user logged out"
