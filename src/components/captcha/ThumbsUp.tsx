@@ -2,10 +2,9 @@ import * as fp from "fingerpose";
 import "@tensorflow/tfjs-core";
 import { useEffect, useRef, useState } from "react";
 import "@tensorflow/tfjs-backend-webgl";
-import { Hands } from "@mediapipe/hands";
-import { Camera } from "@mediapipe/camera_utils";
+// import * as Hands from "@mediapipe/hands";
 
-const hands = new Hands({
+const hands = new window.Hands({
   locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
   },

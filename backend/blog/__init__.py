@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -62,6 +62,24 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     return jsonify({"message": "Authentication required"}), 403
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('../../dist', path)
+
+@app.route('/')
+def serve():
+    return send_from_directory('../../dist', 'index.html')
+
+@app.route("/api/me", methods=['GET'])
+@login_required
+def me():
+  return jsonify({
+    'username': current_user.username,
+    'highScoreMin': User.HS_min(current_user),
+    'highScoreSec': User.HS_sec(current_user),
+    'highScoreDate': current_user.highScoreDate,
+  })
 
 # POST /api/login
 # {
