@@ -53,7 +53,6 @@ export function SignUpPage(){
     const [password, setPassword] = useState("");
 
     const toggleWindow = () => {
-        alert("Toggle window");
         setWindow(!window);
     };
 
