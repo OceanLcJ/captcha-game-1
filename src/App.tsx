@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <LeaderboardPage time={new Date()} />
+      <SignUpPage />
     </>
   )
 }
