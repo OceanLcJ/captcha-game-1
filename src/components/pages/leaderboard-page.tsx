@@ -29,6 +29,11 @@ export function LeaderboardPage(props: Props) {
     fetchLeaderboard();
   }, []);
 
+  const signout = () => {
+    fetch("/api/logout");
+    location.reload(); // lol whatever
+  };
+
   return (
     <>
       <div className="hero">
@@ -39,6 +44,9 @@ export function LeaderboardPage(props: Props) {
         <div className="hero-text">
           <h1>Congrats!</h1>
           <h2>You have successfully signed in.</h2>
+          <button className="bg-blue-400 mt-5" onClick={signout}>
+            Sign out
+          </button>
         </div>
       </div>
       <div className="content">
