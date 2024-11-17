@@ -1,4 +1,7 @@
 # Captcha Game (aka I Am Not a Robot)
+
+## IMPORTANT: The demo and live versions of the website feature different captchas, since browsers don't like giving webcam and microphone access to websites without SSL certificate (which we didn't have time to acquire during the hackathon). To switch between these versions, go to Window.tsx and change IS_DEMO to either true or false. If you are locally hosting, we recommend using the demo version.
+
 ## Summary
 "I Am Not a Robot" is a parody game that starts with simple, tradition captcha puzzles and evolves into increasingly unique challenges. It integrates visual recognition, speech analysis, and interactive gameplay designed to stump humans and AI. Responding to "human-like" queries and challenging your patience, the game pushes you to go to great lengths to prove that you're a human.
 
