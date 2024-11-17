@@ -1,0 +1,48 @@
+/* General Styling */
+.Poly-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0px;
+}
+
+.equation {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    border: 2px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.input {
+    font-size: 16px; /* Slightly larger for readability */
+    font-weight: 500; /* Moderate weight for balance */
+    color: #34495e; /* Darker color for text */
+    border: 2px; /* Blue border for better visibility */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    text-align: left;
+    margin-rigth: 20px;
+}
+
+.input-box {
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px;
+    width: 100px;
+    hight: 20px;
+    margin-rigth: 20px;
+}

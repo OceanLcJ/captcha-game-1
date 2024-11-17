@@ -1,3 +1,4 @@
+import './Poly.css'
 import React, { useState, useEffect } from "react";
 
 interface Props {
@@ -38,29 +39,32 @@ function Poly(props: Props) {
     }, [userRoot1, userRoot2])
 
     return (
-        <div className="quadratic-captcha w-[500px]">
-            <h2>
-                Solve: x<sup>2</sup> - {b}x + {c} = 0
-            </h2>
+        <div className="Poly-container">
+            <div className="Poly">
+                <h2 className="equation">
+                    Solve: x<sup>2</sup> - {b}x + {c} = 0
+                </h2>
 
-            <div>
-                <label>
-                    Root 1:
-                    <input
-                        type="number"
-                        value={userRoot1}
-                        onChange={(e) => setUserRoot1(e.target.value)}
-                    />
-                </label>
-                <br />
-                <label>
-                    Root 2:
-                    <input
-                        type="number"
-                        value={userRoot2}
-                        onChange={(e) => setUserRoot2(e.target.value)}
-                    />
-                </label>
+                <div className="input">
+                    <label className="input-label">
+                        Root 1:
+                        <input
+                            type="number"
+                            className="input-box"
+                            value={userRoot1}
+                            onChange={(e) => setUserRoot1(e.target.value)}
+                        />
+                    </label>
+                    <label className="input">
+                        Root 2:
+                        <input
+                            type="number"
+                            className="input-box"
+                            value={userRoot2}
+                            onChange={(e) => setUserRoot2(e.target.value)}
+                        />
+                    </label>
+                </div>
             </div>
         </div>
     );
