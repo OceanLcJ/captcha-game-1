@@ -78,12 +78,6 @@ def serve_public(path):
 @app.route("/api/me", methods=['GET'])
 @login_required
 def me():
-  return jsonify({
-    'username': current_user.username,
-    'highScoreMin': User.HS_min(current_user),
-    'highScoreSec': User.HS_sec(current_user),
-    'highScoreDate': current_user.highScoreDate,
-  })
 
 # POST /api/login
 # {
@@ -118,7 +112,6 @@ def login():
 				user.highScore = score
 				user.highScoreDate = datetime.utcnow()
 				db.session.commit()
-			return "user loged in"
 		else:
 			return "wrong pw"
 	else:
@@ -130,7 +123,6 @@ def login():
 		db.session.add(new_user)
 		db.session.commit()
 		login_user(new_user, remember=True)
-		return "user created"
 
 @app.route("/api/logout")
 def logout():
