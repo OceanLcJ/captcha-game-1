@@ -37,13 +37,13 @@ class User(db.Model, UserMixin):
     highScore = db.Column(db.Integer)
     highScoreDate = db.Column(db.DateTime)
 
+    def HS_min(self):
+        return str(int(self.highScore/60))
+
+    def HS_sec(self):
+        return str(self.highScore%60)
+
     def __repr__(self):
-        def HS_min(self):
-            return str(int(self.highScore/60))
-
-        def HS_sec(self):
-            return str(self.highScore%60)
-
         return f"{self.username} {HS_min(self)}:{HS_sec(self)} at {self.highScoreDate}"
 
     def get_id(self):
@@ -76,7 +76,8 @@ def leaderboard():
   users = User.query.order_by(User.highScore.asc()).all()
   return jsonify([{
     'username': user.username,
-    'highScore': user.highScore,
+    'highScoreMin': HS_min(user)
+    'highScoreSec': HS_sec(user)
     'highScoreDate': user.highScoreDate
   } for user in users])
 
@@ -101,9 +102,9 @@ def login():
 	else:
 		# create a new user
 		new_user = User(username=username,
-      pw=bcrypt.generate_password_hash(pw).decode('utf-8'),
-      highScore=score,
-      highScoreDate=datetime.utcnow())
+        pw=bcrypt.generate_password_hash(pw).decode('utf-8'),
+        highScore=score,
+        highScoreDate=datetime.utcnow())
 		db.session.add(new_user)
 		db.session.commit()
 		login_user(new_user, remember=True)
