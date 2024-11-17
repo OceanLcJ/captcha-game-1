@@ -33,19 +33,19 @@ function Window(props: Props) {
 
     const levels = [
         <CrossingGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <TrafficGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <Slide setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"}/>,
-        // <Poly setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2}/>,
-        // <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3}/>,
-        // <CountBalls setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
-        // <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
+        <TrafficGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <StopSignGrid setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <Slide setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <Waldo setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <TicTacToe setL={setL} setP={setP} setSuccess={setSuccess} mode={"hard"}/>,
+        <Poly setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={2}/>,
+        <SpeechRecognition setL={setL} setP={setP} setSuccess={setSuccess} index={3}/>,
+        <CountBalls setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <ThumbsUp setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <MovingCheck setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <ExitVim setL={setL} setP={setP} setSuccess={setSuccess}/>,
+        <RotatingEmail setL={setL} setP={setP} setSuccess={setSuccess} username={props.username}/>
     ]
 
     const handleVerifyClick = () => {

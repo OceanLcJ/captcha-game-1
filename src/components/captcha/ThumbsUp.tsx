@@ -3,6 +3,7 @@ import "@tensorflow/tfjs-core";
 import { useEffect, useRef, useState } from "react";
 import "@tensorflow/tfjs-backend-webgl";
 // import * as Hands from "@mediapipe/hands";
+// import { Camera } from "@mediapipe/camera_utils";
 
 const hands = new window.Hands({
   locateFile: (file) => {
