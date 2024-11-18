@@ -6,9 +6,13 @@ The demo and live versions of the website feature different captchas, since brow
 Also, in TouchGrass.tsx, you need to supply your own Claude API key.
 
 ## Summary
-"I Am Not a Robot" is a parody game that starts with simple, tradition captcha puzzles and evolves into increasingly unique challenges. It integrates visual recognition, speech analysis, and interactive gameplay designed to stump humans and AI. Responding to "human-like" queries and challenging your patience, the game pushes you to go to great lengths to prove that you're a human.
+"I Am Not a Robot" is a parody game that starts with simple, traditional captcha puzzles and evolves into increasingly unique challenges. It integrates visual recognition, speech analysis, and interactive gameplay designed to stump humans and AI. Responding to "human-like" queries and challenging your patience, the game pushes you to go to great lengths to prove that you're a human.
 
 The front end was developed using React and TypeScript. For the backend, we used Flask to handle API communication and Terraform to manage our infrastructure. Terraform allowed us to automate deployment processes and have a history version for the cloud, helping us maintain an efficient backend.
+
+## Achievements
+- 2nd Place in Entertainment Track at [DandyHacks '24](https://devpost.com/software/iamnotarobot)
+- [MLH] Best Use of Terraform
 
 ## What's next for Captcha Game
 
