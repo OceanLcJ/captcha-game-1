@@ -29,3 +29,6 @@ backend/lib
 backend/__pycache__
 backend/blog/__pycache__
 backend/var/blog-instance/db.db
+
+# Spec workflow artifacts
+.spec-workflow/
